@@ -24,9 +24,9 @@ for(const note of data.notes){
  content=content.replace(/(<h2 id="目录"[\s\S]*?<\/h2>)([\s\S]*?)(?=<h2)/,'<details class="original-toc"><summary>原笔记目录</summary>$2</details>');
  const chapters=headings.filter(h=>h.depth===2&&h.text!=='目录');let toc='';
  for(const [i,h] of chapters.entries()){const children=[];for(let j=headings.indexOf(h)+1;j<headings.length&&headings[j].depth!==2;j++)if(headings[j].depth===3)children.push(headings[j]);toc+=`<details class="chapter" ${i===0?'open':''}><summary><span class="chapter-number">${String(i+1).padStart(2,'0')}</span><a href="#${esc(h.id)}">${esc(h.text.replace(/^[一二三四五六七八九十]+、/,''))}</a><span class="chevron">⌄</span></summary>${children.length?`<div class="subchapters">${children.map(c=>`<a href="#${esc(c.id)}">${esc(c.text)}</a>`).join('')}</div>`:''}</details>`;}
- const sub=subjectFor(note.subject);const first=chapters[0]?.id||headings[0]?.id||'article';const test=chapters.find(c=>c.text.includes('自测'))?.id||first;
+ const sub=subjectFor(note.subject);const first=chapters[0]?.id||headings[0]?.id||'article';
  let html=await fs.readFile(new URL('reader-template.html',root),'utf8');
- const vals={CONTENT:content,TOC:toc,CHAPTER_COUNT:chapters.length,WORD_COUNT:(source.replace(/\s/g,'').length/10000).toFixed(1),FIRST:first,SELFTEST:test,NOTE_TITLE:esc(note.title),SUBJECT_NAME:sub.name,SUBJECT_EN:sub.english.toUpperCase(),SUBJECT_ID:sub.id,NOTE_COUNT:data.notes.filter(n=>n.subject===sub.id).length,RAW_PATH:encodedPath(note.file),PAGE_DATA:json({kind:'reader',base:'../',noteId:note.id,noteTitle:note.title,subject:sub.name,first})};
+ const vals={CONTENT:content,TOC:toc,CHAPTER_COUNT:chapters.length,WORD_COUNT:(source.replace(/\s/g,'').length/10000).toFixed(1),FIRST:first,NOTE_TITLE:esc(note.title),SUBJECT_NAME:sub.name,SUBJECT_EN:sub.english.toUpperCase(),SUBJECT_ID:sub.id,NOTE_COUNT:data.notes.filter(n=>n.subject===sub.id).length,RAW_PATH:encodedPath(note.file),PAGE_DATA:json({kind:'reader',base:'../',noteId:note.id,noteTitle:note.title,subject:sub.name,first})};
  for(const[k,v]of Object.entries(vals))html=html.replaceAll(`{{${k}}}`,String(v));if(/\{\{[A-Z_]+\}\}/.test(html))throw Error('Unresolved placeholders');
  await fs.writeFile(new URL(`read/${note.id}.html`,root),html);
  let section=null;let headingIndex=0;
