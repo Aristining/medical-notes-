@@ -26,11 +26,6 @@
       "english": "Laboratory diagnostics"
     },
     {
-      "id": "histology",
-      "name": "形态学切片",
-      "english": "Morphology slides"
-    },
-    {
       "id": "hematology",
       "name": "血液系统",
       "english": "Hematology"
@@ -104,6 +99,20 @@
       "title": "内分泌系统的组织学结构和发生",
       "file": "materials/endocrine/01内分泌系统的组织学结构和发生-知识点总结.md",
       "size": 20227
+    },
+    {
+      "id": "reproductive-summary",
+      "subject": "reproductive",
+      "title": "生殖系统整合复习笔记",
+      "file": "materials/reproductive/生殖系统整合复习笔记.md",
+      "size": 85949
+    },
+    {
+      "id": "imaging-overview",
+      "subject": "imaging",
+      "title": "医学影像学总论：自学与复习笔记",
+      "file": "materials/imaging/医学影像学总论_自学与复习笔记.md",
+      "size": 49381
     }
   ]
 }
