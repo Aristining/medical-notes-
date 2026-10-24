@@ -1,1 +1,12 @@
-{"name":"urinary-system-review","private":true,"type":"module","scripts":{"build":"node build.mjs"},"devDependencies":{"marked":"17.0.5"}}
+{
+  "name": "urinary-system-review",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "marked": "17.0.5"
+  }
+}
