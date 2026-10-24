@@ -2,6 +2,6 @@
 
 [打开网站](https://aristining.github.io/medical-notes-/)
 
-按 7 个科目组织资料，当前收录 11 份课程笔记，支持全文搜索、章节目录、收藏和手机阅读。
+按 7 个科目组织资料，当前收录 18 份课程笔记，支持全文搜索、章节目录、收藏和手机阅读。
 
 网站入口：[index.html](./index.html)。部署和更新说明见 [WEBSITE.md](./WEBSITE.md)。

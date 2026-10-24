@@ -53,5 +53,40 @@
     "file": "materials/imaging/医学影像学总论_自学与复习笔记.md",
     "sha256": "7546b648234a1653006a9fd3b1a2da85e05aca48889ad57e7f785a1b9e5d4e38",
     "bytes": 49381
+  },
+  {
+    "file": "materials/diagnostics/00_阅读导航.md",
+    "sha256": "70346387793d20f40ee41a5a2f879a82251b40b6649d217f94782380be3b2537",
+    "bytes": 3598
+  },
+  {
+    "file": "materials/diagnostics/01_临床免疫学实验诊断_知识梳理.md",
+    "sha256": "b79432eee2a86d3d6d5b1f7a65489daf8646a9ff5fa1ebc09d2412d5eb663380",
+    "bytes": 20645
+  },
+  {
+    "file": "materials/diagnostics/02_肝功能_知识梳理.md",
+    "sha256": "88ad8d594a571e9f25d2bd3e6b5d0660f42967472b6a78070d98ddfcb87b0703",
+    "bytes": 15699
+  },
+  {
+    "file": "materials/diagnostics/03_肾功能_知识梳理.md",
+    "sha256": "87d3c27e54024ebd7a4fcd6038cc9d76946fd7630b9a081fc2f139a902a81150",
+    "bytes": 17177
+  },
+  {
+    "file": "materials/diagnostics/04_临床微生物实验诊断_知识梳理.md",
+    "sha256": "24dbfe8ddb5c0d109b665d5896dd9ac211b3e984456ac6289168ada7eda1c69e",
+    "bytes": 21980
+  },
+  {
+    "file": "materials/diagnostics/04B_抗菌药物敏感性试验与耐药性_知识梳理.md",
+    "sha256": "276965d984809314fcc3fadf929cc2a241300da13e0ccbdd17b016394dd6ff96",
+    "bytes": 15367
+  },
+  {
+    "file": "materials/diagnostics/04C_性传播疾病实验诊断_知识梳理.md",
+    "sha256": "6fedb49d3742b313282297b5b40d2dab1151289c1f369c9f5969c5cb67f7e06e",
+    "bytes": 17076
   }
 ]

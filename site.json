@@ -113,6 +113,55 @@
       "title": "医学影像学总论：自学与复习笔记",
       "file": "materials/imaging/医学影像学总论_自学与复习笔记.md",
       "size": 49381
+    },
+    {
+      "id": "diagnostics-00",
+      "subject": "diagnostics",
+      "title": "实验诊断学：六份知识梳理阅读导航",
+      "file": "materials/diagnostics/00_阅读导航.md",
+      "size": 3598
+    },
+    {
+      "id": "diagnostics-01",
+      "subject": "diagnostics",
+      "title": "临床免疫学实验诊断：知识梳理",
+      "file": "materials/diagnostics/01_临床免疫学实验诊断_知识梳理.md",
+      "size": 20645
+    },
+    {
+      "id": "diagnostics-02",
+      "subject": "diagnostics",
+      "title": "肝脏功能实验室检测：知识梳理",
+      "file": "materials/diagnostics/02_肝功能_知识梳理.md",
+      "size": 15699
+    },
+    {
+      "id": "diagnostics-03",
+      "subject": "diagnostics",
+      "title": "肾脏功能评估：知识梳理",
+      "file": "materials/diagnostics/03_肾功能_知识梳理.md",
+      "size": 17177
+    },
+    {
+      "id": "diagnostics-04",
+      "subject": "diagnostics",
+      "title": "临床微生物实验诊断：知识梳理",
+      "file": "materials/diagnostics/04_临床微生物实验诊断_知识梳理.md",
+      "size": 21980
+    },
+    {
+      "id": "diagnostics-04b",
+      "subject": "diagnostics",
+      "title": "抗菌药物敏感性试验与细菌耐药性：知识梳理",
+      "file": "materials/diagnostics/04B_抗菌药物敏感性试验与耐药性_知识梳理.md",
+      "size": 15367
+    },
+    {
+      "id": "diagnostics-04c",
+      "subject": "diagnostics",
+      "title": "性传播疾病的实验诊断：知识梳理",
+      "file": "materials/diagnostics/04C_性传播疾病实验诊断_知识梳理.md",
+      "size": 17076
     }
   ]
 }
