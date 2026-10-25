@@ -30,6 +30,16 @@
     "bytes": 38671
   },
   {
+    "file": "materials/respiratory/06-肺部体格检查.md",
+    "sha256": "d6ba5b5f3ad8b387879968a631e1efedfa579b8df6ab366159a281c91883892f",
+    "bytes": 25111
+  },
+  {
+    "file": "materials/respiratory/07-呼吸系统常见症状.md",
+    "sha256": "1c90c69d33bd593b9ed3dcdc49424a22f25782a4bc87f0a3debeee0b25d82c34",
+    "bytes": 29213
+  },
+  {
     "file": "materials/urinary/泌尿系统知识点总结1～5.md",
     "sha256": "275f4a57018b5071f96d206c211fbade7699466b33b6668170ed4fe807c0156c",
     "bytes": 97201

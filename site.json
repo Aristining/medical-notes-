@@ -80,6 +80,20 @@
       "size": 38671
     },
     {
+      "id": "respiratory-06",
+      "subject": "respiratory",
+      "title": "肺部体格检查：知识梳理",
+      "file": "materials/respiratory/06-肺部体格检查.md",
+      "size": 25111
+    },
+    {
+      "id": "respiratory-07",
+      "subject": "respiratory",
+      "title": "呼吸系统常见症状：知识梳理",
+      "file": "materials/respiratory/07-呼吸系统常见症状.md",
+      "size": 29213
+    },
+    {
       "id": "urinary-1-5",
       "subject": "urinary",
       "title": "泌尿系统知识点总结",
