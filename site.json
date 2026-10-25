@@ -34,6 +34,11 @@
       "id": "imaging",
       "name": "医学影像学",
       "english": "Medical imaging"
+    },
+    {
+      "id": "sexual-medicine",
+      "name": "性医学",
+      "english": "Sexual medicine"
     }
   ],
   "notes": [
@@ -176,6 +181,15 @@
       "title": "性传播疾病的实验诊断：知识梳理",
       "file": "materials/diagnostics/04C_性传播疾病实验诊断_知识梳理.md",
       "size": 17076
+    },
+    {
+      "id": "sexual-medicine-notes",
+      "subject": "sexual-medicine",
+      "title": "性医学笔记",
+      "file": "materials/sexual-medicine/性医学笔记.md",
+      "size": 125507,
+      "format": "Word",
+      "download": "materials/sexual-medicine/WH性医学笔记（嫌PPT打印太多的的可以用）.docx"
     }
   ]
 }
