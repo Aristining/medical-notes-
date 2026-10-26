@@ -16,7 +16,7 @@ function firstParagraph(tokens){return tokens?.find(t=>['paragraph','text'].incl
 // Cards are extracts of supplied notes. No external definitions or medical inferences are added.
 export function extractFlashcards(source,headings,note){
  if(note.id==='diagnostics-00')return [];
- const approved=new Set((vocabulary[note.id]||'').split('|').map(termKey));
+ const approved=new Set((vocabulary[note.id]||'').split('|').map(termKey).filter(Boolean));
  const groups=[];let group;let context;let headingIndex=0;let parentBlocked=false;
  for(const token of lexer.lexer(source)){
   if(token.type==='heading'){

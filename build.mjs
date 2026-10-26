@@ -14,6 +14,17 @@ await fs.mkdir(new URL('read/',root),{recursive:true});await fs.mkdir(new URL('s
 const book='<svg viewBox="0 0 24 24"><path d="M3 5q5-2 9 1 4-3 9-1v15q-5-2-9 1-4-3-9-1zM12 6v15"/></svg>';
 const search='<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>';
 const chapterSlug=(text,used)=>{const b=text.toLowerCase().replace(/<[^>]*>/g,'').replace(/[^\p{L}\p{N}\s_-]/gu,'').trim().replace(/\s+/g,'-');const n=used.get(b)||0;used.set(b,n+1);return b+(n?`-${n}`:'');};
+function partsOutline(source){
+ let titleSeen=false,inParts=false,fence=null;
+ return source.split('\n').map(line=>{
+  const marker=line.match(/^ {0,3}(`{3,}|~{3,})/);
+  if(marker){if(!fence)fence=marker[1];else if(marker[1][0]===fence[0]&&marker[1].length>=fence.length)fence=null;return line;}
+  if(fence)return line;
+  const heading=line.match(/^(#{1,6})(\s+.*)$/);if(!heading)return line;
+  if(heading[1].length===1){if(!titleSeen){titleSeen=true;return line;}inParts=true;}
+  return inParts?'#'.repeat(Math.min(6,heading[1].length+1))+heading[2]:line;
+ }).join('\n');
+}
 function prepareReaderSource(source){
  const definitions=new Set([...source.matchAll(/^\[\^([A-Za-z0-9_-]+)\]:[ \t]*(.+)$/gm)].map(m=>m[1]));
  return source.split('\n').map(line=>{
@@ -36,16 +47,16 @@ function insertReviewGroups(content,groups,headings){
  return content;
 }
 for(const note of data.notes){
- const source=await fs.readFile(new URL(note.file,root),'utf8');const headings=[];const used=new Map();
+ const source=await fs.readFile(new URL(note.file,root),'utf8');const readerSource=note.outline==='parts'?partsOutline(source):source;const headings=[];const used=new Map();
  const marked=new Marked({gfm:true,renderer:{
   html({text}){const anchor=text.trim().match(/^<div data-note-anchor="([A-Za-z][A-Za-z0-9_-]*)"><\/div>$/);return anchor?`<div id="${esc(anchor[1])}" aria-hidden="true"></div>\n`:esc(text);},
   heading({tokens,depth,text}){const id=chapterSlug(text,used);if(depth===1)return '';headings.push({text,depth,id});return `<h${depth} id="${esc(id)}" data-heading="${esc(text)}"><span>${this.parser.parseInline(tokens)}</span>${text==='目录'?'':`<button class="bookmark" data-bookmark="${esc(id)}" aria-label="收藏章节：${esc(text)}" aria-pressed="false" title="收藏这一节"><svg viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4-6 4z"/></svg></button>`}</h${depth}>\n`;},
   image({href,text,title}){if(!/^images\/[A-Za-z0-9_.-]+\.(?:png|jpe?g|gif|webp)$/i.test(href))return esc(text);const path=note.file.slice(0,note.file.lastIndexOf('/')+1)+href;return `<img src="../${encodedPath(path)}" alt="${esc(text)}"${title?` title="${esc(title)}"`:''} decoding="async" style="display:block;max-width:100%;height:auto;margin:18px auto">`;},
   link({href,tokens}){const label=this.parser.parseInline(tokens);if(href.startsWith('#'))return `<a href="${esc(href)}">${label}</a>`;if(/^https?:\/\//i.test(href))return `<a href="${esc(href)}" target="_blank" rel="noreferrer">${label}</a>`;const [path,hash]=href.split('#');let decoded;try{decoded=decodeURIComponent(path);}catch{return label;}const related=noteByFile.get(note.file.slice(0,note.file.lastIndexOf('/')+1)+decoded.replace(/^\.\//,''));return related?`<a href="./${related.id}.html${hash?'#'+esc(hash):''}">${label}</a>`:label;}
  }});
- let content=marked.parse(prepareReaderSource(source));content=content.replaceAll('<table>','<div class="table-wrap" tabindex="0" aria-label="可横向滚动的对比表"><table>').replaceAll('</table>','</table></div>');
+ let content=marked.parse(prepareReaderSource(readerSource));content=content.replaceAll('<table>','<div class="table-wrap" tabindex="0" aria-label="可横向滚动的对比表"><table>').replaceAll('</table>','</table></div>');
  content=content.replace(/(<h2 id="目录"[\s\S]*?<\/h2>)([\s\S]*?)(?=<h2)/,'<details class="original-toc"><summary>原笔记目录</summary>$2</details>');
- const cardGroups=extractFlashcards(source,headings,note);const cardCount=cardGroups.reduce((n,g)=>n+g.cards.length,0);note.cards=cardCount;
+ const cardGroups=extractFlashcards(readerSource,headings,note);const cardCount=cardGroups.reduce((n,g)=>n+g.cards.length,0);note.cards=cardCount;
  compiledCards.push({noteId:note.id,noteTitle:note.title,sourceFile:note.file,groups:cardGroups.map(g=>({...g,cards:g.cards.map(({quote,...card})=>({...card,sourceHash:createHash('sha256').update(quote).digest('hex')}))}))});
  content=insertReviewGroups(content,cardGroups,headings);
  const chapters=headings.filter(h=>h.depth===2&&h.text!=='目录');let toc='';
@@ -56,7 +67,7 @@ for(const note of data.notes){
  for(const[k,v]of Object.entries(vals))html=html.replaceAll(`{{${k}}}`,String(v));if(/\{\{[A-Z_]+\}\}/.test(html))throw Error('Unresolved placeholders');
  await fs.writeFile(new URL(`read/${note.id}.html`,root),html);
  let section=null;let headingIndex=0;
- for(const token of marked.lexer(source)){if(token.type==='heading'&&token.depth>1){const h=headings[headingIndex++];if(h.text==='目录'){section=null;continue;}section={noteId:note.id,noteTitle:note.title,subject:sub.name,id:h.id,title:h.text,text:h.text};searchIndex.push(section);}else if(section){section.text+=' '+token.raw.replace(/!?\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[*_`>#|]/g,' ').replace(/\s+/g,' ');}}
+ for(const token of marked.lexer(readerSource)){if(token.type==='heading'&&token.depth>1){const h=headings[headingIndex++];if(h.text==='目录'){section=null;continue;}section={noteId:note.id,noteTitle:note.title,subject:sub.name,id:h.id,title:h.text,text:h.text};searchIndex.push(section);}else if(section){section.text+=' '+token.raw.replace(/!?\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[*_`>#|]/g,' ').replace(/\s+/g,' ');}}
  integrity.push({file:note.file,sha256:createHash('sha256').update(source).digest('hex'),bytes:Buffer.byteLength(source)});
  note.chapters=chapters.length;note.words=source.replace(/\s/g,'').length;
 }

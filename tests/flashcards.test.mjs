@@ -33,3 +33,8 @@ test('unreviewed generic labels are not promoted into knowledge cards',()=>{
  const s='## 二、抗菌药物名词\n\n### 2.2 MIC\n\n**重点：** 这是重要内容，应该记住，但不是一个名词的解释。\n';
  assert.deepEqual(extractFlashcards(s,headings,note),[]);
 });
+test('a note without reviewed terms cannot create a card from a parenthesized heading',()=>{
+ const s='## 凝血机制\n\n### （二）止凝血障碍的机制\n\n凝血因子消耗后可出现出血倾向，需要结合病程理解。\n';
+ const h=[{depth:2,text:'凝血机制',id:'coagulation'},{depth:3,text:'（二）止凝血障碍的机制',id:'mechanism'}];
+ assert.deepEqual(extractFlashcards(s,h,{id:'unreviewed-note'}),[]);
+});

@@ -113,6 +113,14 @@
       "size": 132739
     },
     {
+      "id": "hematology-bleeding-thrombosis",
+      "subject": "hematology",
+      "title": "出血与血栓（Bleeding and Thrombosis）自学笔记",
+      "file": "materials/hematology/出血与血栓-学习笔记.md",
+      "size": 46739,
+      "outline": "parts"
+    },
+    {
       "id": "endocrine-01",
       "subject": "endocrine",
       "title": "内分泌系统的组织学结构和发生",
