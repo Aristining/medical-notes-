@@ -135,6 +135,14 @@
       "outline": "parts"
     },
     {
+      "id": "hematology-transfusion",
+      "subject": "hematology",
+      "title": "输血与血型血清学核心笔记",
+      "file": "materials/hematology/输血与血型血清学核心笔记.md",
+      "size": 32017,
+      "math": "plain"
+    },
+    {
       "id": "endocrine-01",
       "subject": "endocrine",
       "title": "内分泌系统的组织学结构和发生",

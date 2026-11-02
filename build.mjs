@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { Marked } from 'marked';
 import { extractFlashcards } from './flashcards.mjs';
+import { readableMath } from './reader-math.mjs';
 const root=new URL('./',import.meta.url);
 const data=JSON.parse(await fs.readFile(new URL('site.json',root),'utf8'));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -47,7 +48,7 @@ function insertReviewGroups(content,groups,headings){
  return content;
 }
 for(const note of data.notes){
- const source=await fs.readFile(new URL(note.file,root),'utf8');const readerSource=note.outline==='parts'?partsOutline(source):source;const headings=[];const used=new Map();
+ const source=await fs.readFile(new URL(note.file,root),'utf8');let readerSource=note.outline==='parts'?partsOutline(source):source;if(note.math==='plain')readerSource=readableMath(readerSource);const headings=[];const used=new Map();
  const marked=new Marked({gfm:true,renderer:{
   html({text}){const anchor=text.trim().match(/^<div data-note-anchor="([A-Za-z][A-Za-z0-9_-]*)"><\/div>$/);return anchor?`<div id="${esc(anchor[1])}" aria-hidden="true"></div>\n`:esc(text);},
   heading({tokens,depth,text}){const id=chapterSlug(text,used);if(depth===1)return '';headings.push({text,depth,id});return `<h${depth} id="${esc(id)}" data-heading="${esc(text)}"><span>${this.parser.parseInline(tokens)}</span>${text==='目录'?'':`<button class="bookmark" data-bookmark="${esc(id)}" aria-label="收藏章节：${esc(text)}" aria-pressed="false" title="收藏这一节"><svg viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4-6 4z"/></svg></button>`}</h${depth}>\n`;},
