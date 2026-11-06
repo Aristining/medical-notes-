@@ -55,6 +55,11 @@
     "bytes": 33320
   },
   {
+    "file": "materials/urinary/2026-11-03-肾功能不全-课程笔记.md",
+    "sha256": "47b7c5c9ce95116e769c3ceda010c33f5fc687e6682dafd5a012e94cbded3e72",
+    "bytes": 22082
+  },
+  {
     "file": "materials/hematology/血液系统知识点总结.md",
     "sha256": "122d0138b29061d773997448865927deba63e4e13d21e7b79bbc90a847bc9b5e",
     "bytes": 132739
@@ -80,6 +85,11 @@
     "bytes": 37527
   },
   {
+    "file": "materials/endocrine/2026-11-04-内分泌生理学-课程笔记.md",
+    "sha256": "ec53621d294135ef4c04492d68b06d73666d370b017b8acb6f44a0f171c049b8",
+    "bytes": 52348
+  },
+  {
     "file": "materials/reproductive/生殖系统整合复习笔记.md",
     "sha256": "ad5c1fddf9201fc7fffcb417694c4317fd5d854860cc42b73de2bf68a7a2dfe1",
     "bytes": 85949
@@ -88,6 +98,11 @@
     "file": "materials/imaging/医学影像学总论_自学与复习笔记.md",
     "sha256": "7546b648234a1653006a9fd3b1a2da85e05aca48889ad57e7f785a1b9e5d4e38",
     "bytes": 49381
+  },
+  {
+    "file": "materials/imaging/2026-11-05-头颈五官医学影像学-课程笔记.md",
+    "sha256": "9018a83cd2c669acb97ea862aa0075357812df4132e6e8efbfbb944ed2217e77",
+    "bytes": 17856
   },
   {
     "file": "materials/diagnostics/00_阅读导航.md",
@@ -128,6 +143,11 @@
     "file": "materials/diagnostics/05_体液一般检查_知识梳理.md",
     "sha256": "ffff6386e54efff65a45eff8567c9079b250888501cceda640b5d7dc48437c8b",
     "bytes": 43785
+  },
+  {
+    "file": "materials/diagnostics/2026-11-06-血脂、脂蛋白与心脏生物标志物-课程笔记.md",
+    "sha256": "57856f92808fb376fb1b1b63376b7691301d331f7a037169694c0eb02656a507",
+    "bytes": 39344
   },
   {
     "file": "materials/sexual-medicine/性医学笔记.md",

@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { Marked } from 'marked';
 import { extractFlashcards } from './flashcards.mjs';
 import { readableMath } from './reader-math.mjs';
+import { mathmlExtension } from './reader-mathml.mjs';
 const root=new URL('./',import.meta.url);
 const data=JSON.parse(await fs.readFile(new URL('site.json',root),'utf8'));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -55,6 +56,7 @@ for(const note of data.notes){
   image({href,text,title}){if(!/^images\/[A-Za-z0-9_.-]+\.(?:png|jpe?g|gif|webp)$/i.test(href))return esc(text);const path=note.file.slice(0,note.file.lastIndexOf('/')+1)+href;return `<img src="../${encodedPath(path)}" alt="${esc(text)}"${title?` title="${esc(title)}"`:''} decoding="async" style="display:block;max-width:100%;height:auto;margin:18px auto">`;},
   link({href,tokens}){const label=this.parser.parseInline(tokens);if(href.startsWith('#'))return `<a href="${esc(href)}">${label}</a>`;if(/^https?:\/\//i.test(href))return `<a href="${esc(href)}" target="_blank" rel="noreferrer">${label}</a>`;const [path,hash]=href.split('#');let decoded;try{decoded=decodeURIComponent(path);}catch{return label;}const related=noteByFile.get(note.file.slice(0,note.file.lastIndexOf('/')+1)+decoded.replace(/^\.\//,''));return related?`<a href="./${related.id}.html${hash?'#'+esc(hash):''}">${label}</a>`:label;}
  }});
+ if(note.math==='mathml')marked.use(mathmlExtension);
  let content=marked.parse(prepareReaderSource(readerSource));content=content.replaceAll('<table>','<div class="table-wrap" tabindex="0" aria-label="可横向滚动的对比表"><table>').replaceAll('</table>','</table></div>');
  content=content.replace(/(<h2 id="目录"[\s\S]*?<\/h2>)([\s\S]*?)(?=<h2)/,'<details class="original-toc"><summary>原笔记目录</summary>$2</details>');
  const cardGroups=extractFlashcards(readerSource,headings,note);const cardCount=cardGroups.reduce((n,g)=>n+g.cards.length,0);note.cards=cardCount;
@@ -65,7 +67,7 @@ for(const note of data.notes){
  const sub=subjectFor(note.subject);const first=chapters[0]?.id||headings[0]?.id||'article';
  let html=await fs.readFile(new URL('reader-template.html',root),'utf8');
  const vals={CONTENT:content,TOC:toc,CHAPTER_COUNT:chapters.length,WORD_COUNT:(source.replace(/\s/g,'').length/10000).toFixed(1),FIRST:first,NOTE_TITLE:esc(note.title),SUBJECT_NAME:sub.name,SUBJECT_EN:sub.english.toUpperCase(),SUBJECT_ID:sub.id,NOTE_COUNT:data.notes.filter(n=>n.subject===sub.id).length,RAW_PATH:encodedPath(note.download||note.file),CARD_META:cardCount?`<i></i><a class="card-jump" href="#cards-${esc(cardGroups[0].id)}">${cardCount} 张知识卡片 ↗</a>`:'',CARD_BUTTON:cardCount?'<button type="button" id="jumpToCards">本节卡片</button>':'',PAGE_DATA:json({kind:'reader',base:'../',noteId:note.id,noteTitle:note.title,subject:sub.name,first})};
- for(const[k,v]of Object.entries(vals))html=html.replaceAll(`{{${k}}}`,String(v));if(/\{\{[A-Z_]+\}\}/.test(html))throw Error('Unresolved placeholders');
+ html=html.replace(/\{\{([A-Z_]+)\}\}/g,(_,key)=>{if(!Object.hasOwn(vals,key))throw Error('Unresolved placeholder: '+key);return String(vals[key]);});
  await fs.writeFile(new URL(`read/${note.id}.html`,root),html);
  let section=null;let headingIndex=0;
  for(const token of marked.lexer(readerSource)){if(token.type==='heading'&&token.depth>1){const h=headings[headingIndex++];if(h.text==='目录'){section=null;continue;}section={noteId:note.id,noteTitle:note.title,subject:sub.name,id:h.id,title:h.text,text:h.text};searchIndex.push(section);}else if(section){section.text+=' '+token.raw.replace(/!?\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[*_`>#|]/g,' ').replace(/\s+/g,' ');}}

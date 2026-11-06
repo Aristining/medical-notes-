@@ -120,6 +120,15 @@
       "size": 33320
     },
     {
+      "id": "urinary-renal-failure",
+      "subject": "urinary",
+      "title": "肾功能不全：病理生理学课程笔记",
+      "file": "materials/urinary/2026-11-03-肾功能不全-课程笔记.md",
+      "size": 22083,
+      "math": "mathml",
+      "date": "2026-11-03"
+    },
+    {
       "id": "hematology-summary",
       "subject": "hematology",
       "title": "血液系统知识点总结",
@@ -157,6 +166,15 @@
       "size": 37527
     },
     {
+      "id": "endocrine-physiology",
+      "subject": "endocrine",
+      "title": "内分泌生理学：课程备考笔记",
+      "file": "materials/endocrine/2026-11-04-内分泌生理学-课程笔记.md",
+      "size": 52349,
+      "math": "mathml",
+      "date": "2026-11-04"
+    },
+    {
       "id": "reproductive-summary",
       "subject": "reproductive",
       "title": "生殖系统整合复习笔记",
@@ -169,6 +187,15 @@
       "title": "医学影像学总论：自学与复习笔记",
       "file": "materials/imaging/医学影像学总论_自学与复习笔记.md",
       "size": 49381
+    },
+    {
+      "id": "imaging-head-neck",
+      "subject": "imaging",
+      "title": "头颈五官医学影像学：课程总结",
+      "file": "materials/imaging/2026-11-05-头颈五官医学影像学-课程笔记.md",
+      "size": 17856,
+      "math": "mathml",
+      "date": "2026-11-05"
     },
     {
       "id": "diagnostics-00",
@@ -225,6 +252,16 @@
       "title": "体液一般检查：知识梳理与复习",
       "file": "materials/diagnostics/05_体液一般检查_知识梳理.md",
       "size": 43832
+    },
+    {
+      "id": "diagnostics-lipids-cardiac",
+      "subject": "diagnostics",
+      "title": "血脂、脂蛋白与心脏生物标志物：课堂精讲",
+      "file": "materials/diagnostics/2026-11-06-血脂、脂蛋白与心脏生物标志物-课程笔记.md",
+      "size": 39344,
+      "math": "mathml",
+      "date": "2026-11-06",
+      "outline": "parts"
     },
     {
       "id": "sexual-medicine-notes",
