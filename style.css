@@ -11,3 +11,21 @@
 @media(max-width:700px){.review-cards{padding:18px 14px;margin:28px 0 34px}.review-heading{gap:8px;flex-wrap:wrap}.article .review-heading h3{font-size:22px}.knowledge-grid{grid-template-columns:1fr}.knowledge-card summary{min-height:130px}.reading-controls{gap:9px}.reading-controls #highFrequency{display:none}.review-tools button{min-height:38px}.card-actions button{min-height:40px}.card-answer{padding:0 16px 17px}}
 
 .knowledge-grid.single-card{grid-template-columns:1fr}
+
+/* Homepage notebook illustration and text-only subject cards. */
+
+.library-hero {padding-right:clamp(180px,32%,320px)}
+.library-hero::after {content:"";position:absolute;right:1.5%;top:50%;transform:translateY(-50%) rotate(3deg);width:31%;max-width:300px;aspect-ratio:3/2;background:url(assets/notebook.webp) center/contain no-repeat;mix-blend-mode:multiply;pointer-events:none;mask-image:radial-gradient(ellipse 67% 68%,black 58%,transparent 90%)}
+html[data-theme=dark] .library-hero::after {mix-blend-mode:normal;border-radius:18px;mask-image:none}
+@media(max-width:650px){.library-hero{padding-right:0}.library-hero::after{width:84px;top:0;right:0;transform:rotate(3deg)}.library-hero h1{margin-top:32px}}
+@media(max-width:360px){.library-hero::after{width:66px}}
+
+.library-main .subject-card { position: relative; }
+.library-main .subject-card .subject-icon { display: none; }
+.library-main .subject-card .card-top {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+}
+.library-main .subject-card .eyebrow { padding-right: 22px; }
